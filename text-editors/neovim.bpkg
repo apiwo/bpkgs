@@ -1,0 +1,22 @@
+#bpkg
+name="neovim"
+desc="Modern Vim‑compatible text editor."
+info="https://neovim.io/"
+version="0.10.0"
+license="Apache-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="cmake, ninja, gcc, libuv-dev, libmsgpack-dev, libtermkey-dev, libvterm-dev"
+build-type="tarball"
+download="https://github.com/neovim/neovim/archive/refs/tags/v0.10.0.tar.gz"
+
+build() {
+    mkdir -p build && cd build
+    cmake -DCMAKE_BUILD_TYPE=Release ..
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
