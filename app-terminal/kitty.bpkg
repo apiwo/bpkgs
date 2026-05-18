@@ -1,0 +1,20 @@
+#bpkg
+name="kitty"
+desc="GPU-based terminal emulator."
+info="https://sw.kovidgoyal.net/kitty/"
+version="0.46.2"
+license="GPLv3"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="gcc, make, python3, libxcb-dev, libx11-dev, openssl, libpng, libfontconfig-dev, libharfbuzz-dev, libcanberra-dev"
+build-type="tarball"
+download="https://github.com/kovidgoyal/kitty/releases/download/v0.46.2/kitty-0.46.2.tar.xz"
+build() {
+    python3 setup.py linux-package
+}
+instructions() {
+    mkdir -p "$SCRAP_PKG_DEST/usr"
+    cp -r linux-package/* "$SCRAP_PKG_DEST/usr/"
+    ln -sf /usr/bin/kitty "$SCRAP_PKG_DEST/usr/bin/kitten" 2>/dev/null || true
+}
