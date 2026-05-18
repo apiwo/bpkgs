@@ -1,0 +1,21 @@
+#bpkg
+name="busybox"
+desc="Single-binary suite of essential Unix utilities."
+info="https://busybox.net/"
+version="1.38.0"
+license="GPL-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="essential"
+depends="gcc, make, musl-dev"
+build-type="tarball"
+download="https://busybox.net/downloads/busybox-1.38.0.tar.bz2"
+
+build() {
+    make defconfig
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
