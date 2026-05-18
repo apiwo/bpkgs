@@ -1,0 +1,24 @@
+#bpkg
+name="clang"
+desc="C, C++, and Objective‑C compiler frontend for LLVM."
+info="https://clang.llvm.org/"
+version="18.1.0"
+license="Apache-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="cmake, ninja, gcc, python3, libstdc++-dev"
+build-type="tarball"
+download="https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-18.1.0.tar.gz"
+
+build() {
+    mkdir -p build && cd build
+    cmake -DLLVM_ENABLE_PROJECTS=clang \
+          -DCMAKE_BUILD_TYPE=Release \
+          -G "Unix Makefiles" ../llvm
+    make clang
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
