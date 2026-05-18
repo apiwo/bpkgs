@@ -1,0 +1,20 @@
+#bpkg
+name="alacritty"
+desc="GPU-accelerated terminal emulator."
+info="https://alacritty.org/"
+version="0.13.2"
+license="Apache-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="rust, cargo, cmake, freetype-dev, fontconfig-dev, libxcb-dev"
+build-type="tarball"
+download="https://github.com/alacritty/alacritty/archive/refs/tags/v0.13.2.tar.gz"
+
+build() {
+    cargo build --release
+}
+
+instructions() {
+    install -Dm755 target/release/alacritty "$SCRAP_PKG_DEST/usr/bin/alacritty"
+}
