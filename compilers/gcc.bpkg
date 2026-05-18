@@ -1,0 +1,21 @@
+#bpkg
+name="gcc"
+desc="GNU Compiler Collection."
+info="https://gcc.gnu.org/"
+version="14.1.0"
+license="GPL-3.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="essential"
+depends="gmp-dev, mpfr-dev, mpc-dev, make"
+build-type="tarball"
+download="https://ftp.gnu.org/gnu/gcc/gcc-14.1.0/gcc-14.1.0.tar.xz"
+
+build() {
+    ./configure --prefix=/usr --enable-languages=c,c++
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
