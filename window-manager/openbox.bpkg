@@ -1,0 +1,22 @@
+#bpkg
+name="openbox"
+desc="Highly configurable stacking window manager."
+info="http://openbox.org/"
+version="3.6.1"
+license="GPL-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="gcc, make, autoconf, automake, libxml2-dev, pango-dev"
+build-type="tarball"
+download="https://github.com/danakj/openbox/archive/refs/tags/3.6.1.tar.gz"
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
