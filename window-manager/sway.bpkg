@@ -1,0 +1,26 @@
+#bpkg
+name="sway"
+desc="i3-compatible Wayland compositor."
+info="https://swaywm.org/"
+version="1.11"
+license="MIT"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="gcc, make, meson, ninja, wayland, wayland-protocols, libwlroots-dev, libxkbcommon-dev, libpango-dev, libcairo-dev, gdk-pixbuf-dev, swaybg, libinput, libcap-dev"
+build-type="tarball"
+download="https://github.com/swaywm/sway/releases/download/1.11/sway-1.11.tar.gz"
+build() {
+    mkdir -p build && cd build
+    meson setup .. --prefix=/usr \
+                   --buildtype=release \
+                   -Dxwayland=enabled \
+                   -Dtray=enabled
+    ninja
+}
+instructions() {
+    cd build
+    DESTDIR="$SCRAP_PKG_DEST" ninja install
+    mkdir -p "$SCRAP_PKG_DEST/etc/sway"
+    cp ../config.in "$SCRAP_PKG_DEST/etc/sway/config" 2>/dev/null || true
+}
