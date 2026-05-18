@@ -1,0 +1,22 @@
+#bpkg
+name="htop"
+desc="Interactive process viewer."
+info="https://htop.dev/"
+version="3.3.0"
+license="GPL-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="gcc, make, autoconf, automake, ncurses-dev"
+build-type="tarball"
+download="https://github.com/htop-dev/htop/archive/refs/tags/3.3.0.tar.gz"
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
