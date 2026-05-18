@@ -1,0 +1,22 @@
+#bpkg
+name="icewm"
+desc="Lightweight window manager with taskbar and menus."
+info="https://ice-wm.org/"
+version="3.4.1"
+license="GPL-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="gcc, make, autoconf, automake, libx11-dev, libxft-dev"
+build-type="tarball"
+download="https://github.com/ice-wm/icewm/archive/refs/tags/3.4.1.tar.gz"
+
+build() {
+    ./autogen.sh
+    ./configure --prefix=/usr
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
