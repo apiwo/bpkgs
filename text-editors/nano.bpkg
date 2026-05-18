@@ -1,0 +1,21 @@
+#bpkg
+name="nano"
+desc="GNU Nano text editor."
+info="https://nano-editor.org/"
+version="8.0"
+license="GPL-3.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="ncurses-dev, gcc, make"
+build-type="tarball"
+download="https://ftp.gnu.org/gnu/nano/nano-8.0.tar.xz"
+
+build() {
+    ./configure --prefix=/usr
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
