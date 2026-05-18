@@ -1,0 +1,22 @@
+#bpkg
+name="lxqt"
+desc="Lightweight Qt-based desktop environment."
+info="https://lxqt-project.org/"
+version="2.0.0"
+license="LGPL-2.1"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="qt6-base-dev, cmake, gcc, libfm-qt-dev"
+build-type="tarball"
+download="https://github.com/lxqt/lxqt/archive/refs/tags/2.0.0.tar.gz"
+
+build() {
+    mkdir build && cd build
+    cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
