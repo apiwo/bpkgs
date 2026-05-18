@@ -1,0 +1,20 @@
+#bpkg
+name="helix"
+desc="Post-modern modal text editor."
+info="https://helix-editor.com/"
+version="24.03"
+license="MPL-2.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="rust, cargo"
+build-type="tarball"
+download="https://github.com/helix-editor/helix/archive/refs/tags/24.03.tar.gz"
+
+build() {
+    cargo build --release
+}
+
+instructions() {
+    install -Dm755 target/release/hx "$SCRAP_PKG_DEST/usr/bin/hx"
+}
