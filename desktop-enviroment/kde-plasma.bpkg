@@ -1,0 +1,23 @@
+#bpkg
+name="kde-plasma"
+desc="KDE Plasma desktop environment."
+info="https://kde.org/plasma-desktop/"
+version="6.0"
+license="LGPL-2.1"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="qt6-base-dev, extra-cmake-modules, gcc, cmake, ninja, kf6-frameworkintegration"
+build-type="tarball"
+download="https://download.kde.org/stable/plasma/6.0.0/plasma-6.0.0.tar.xz"
+
+build() {
+    mkdir -p build && cd build
+    cmake -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_BUILD_TYPE=Release ..
+    make
+}
+
+instructions() {
+    DESTDIR="$SCRAP_PKG_DEST" make install
+}
