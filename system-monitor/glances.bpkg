@@ -1,0 +1,21 @@
+#bpkg
+name="glances"
+desc="Cross-platform system monitoring tool."
+info="https://nicolargo.github.io/glances/"
+version="3.4.0"
+license="LGPL-3.0"
+maintainer="apiwo"
+arch="x86_64"
+priority="optional"
+depends="python3, pip"
+build-type="tarball"
+download="https://github.com/nicolargo/glances/archive/refs/tags/v3.4.0.tar.gz"
+
+build() {
+    pip install .
+}
+
+instructions() {
+    mkdir -p "$SCRAP_PKG_DEST/usr/bin"
+    cp /usr/local/bin/glances "$SCRAP_PKG_DEST/usr/bin/"
+}
